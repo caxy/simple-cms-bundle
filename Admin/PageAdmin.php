@@ -16,6 +16,9 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Symfony\Cmf\Bundle\RoutingBundle\Admin\RouteAdmin;
 use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Sonata\CoreBundle\Form\Type\ImmutableArrayType;
 
 class PageAdmin extends RouteAdmin
 {
@@ -54,9 +57,9 @@ class PageAdmin extends RouteAdmin
         parent::configureFormFields($formMapper);
 
         $isSf28 = method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix');
-        $ckeditorType = $isSf28 ? 'Ivory\CKEditorBundle\Form\Type\CKEditorType' : 'ckeditor';
-        $textareaType = $isSf28 ? 'Symfony\Component\Form\Extension\Core\Type\TextareaType' : 'textarea';
-        $sonataTypeImmutableArray = $isSf28 ? 'Sonata\CoreBundle\Form\Type\ImmutableArrayType' : 'sonata_type_immutable_array';
+        $ckeditorType = $isSf28 ? 'Ivory\CKEditorBundle\Form\Type\CKEditorType' : CKEditorType::class;
+        $textareaType = $isSf28 ? 'Symfony\Component\Form\Extension\Core\Type\TextareaType' : TextareaType::class;
+        $sonataTypeImmutableArray = $isSf28 ? 'Sonata\CoreBundle\Form\Type\ImmutableArrayType' : ImmutableArrayType::class;
 
         $formMapper->remove('content');
 
